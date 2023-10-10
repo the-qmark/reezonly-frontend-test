@@ -12,7 +12,7 @@
 
 <script>
 import MainModal from '@/components/modals/MainModal.vue';
-import RegistrationForm from '../registration-form/RegistrationForm.vue';
+import RegistrationForm from '@/components/forms/RegistrationForm.vue';
 
 export default {
   name: 'FormModal',
