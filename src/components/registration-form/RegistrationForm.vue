@@ -79,7 +79,7 @@
 
 <script>
 import CustomToggle from '../custom-toggle/CustomToggle.vue';
-import CustomButton from '../custom-button/Button.vue';
+import CustomButton from '../custom-button/CustomButton.vue';
 import CustomInput from '../custom-input/CustomInput.vue';
 import CustomSelect from '../custom-select/CustomSelect.vue';
 import CustomCheckbox from '../custom-checkbox/CustomCheckbox.vue';
