@@ -32,7 +32,7 @@
 
 <script>
 import FormModal from '@/components/modals/FormModal.vue';
-import CustomButton from '@/ui/CustomButton.vue';
+import CustomButton from '@/components/ui/CustomButton.vue';
 import userRoles from '@/assets/userRoles';
 import SuccessModal from '@/components/modals/SuccessModal.vue';
 

@@ -15,7 +15,7 @@
 
 <script>
 import MainModal from '@/components/modals/MainModal.vue';
-import CustomButton from '@/ui/CustomButton.vue';
+import CustomButton from '@/components/ui/CustomButton.vue';
 
 export default {
   name: 'FormModal',

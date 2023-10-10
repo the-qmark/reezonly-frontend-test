@@ -78,11 +78,11 @@
 </template>
 
 <script>
-import CustomToggle from '@/ui/CustomToggle.vue';
-import CustomButton from '@/ui/CustomButton.vue';
-import CustomInput from '@/ui/CustomInput.vue';
-import CustomSelect from '@/ui/CustomSelect.vue';
-import CustomCheckbox from '@/ui/CustomCheckbox.vue';
+import CustomToggle from '@/components/ui/CustomToggle.vue';
+import CustomButton from '@/components/ui/CustomButton.vue';
+import CustomInput from '@/components/ui/CustomInput.vue';
+import CustomSelect from '@/components/ui/CustomSelect.vue';
+import CustomCheckbox from '@/components/ui/CustomCheckbox.vue';
 import userRoles from '@/assets/userRoles';
 
 export default {
