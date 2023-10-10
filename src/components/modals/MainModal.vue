@@ -5,10 +5,12 @@
       @click="$emit('close-modal')"
     ></div>
 
-    <div class="main-modal__wrapper">
-      <h2 class="main-modal__title">{{ title }}</h2>
-      <div class="main-modal__content">
-        <slot></slot>
+    <div class="main-modal__container">
+      <div class="main-modal__wrapper">
+        <h2 class="main-modal__title">{{ title }}</h2>
+        <div class="main-modal__content">
+          <slot></slot>
+        </div>
       </div>
     </div>
   </div>
@@ -40,6 +42,41 @@ export default {
   justify-content: center;
 }
 
+.main-modal__background {
+  pointer-events: auto;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #979797;
+  opacity: 0.5;
+}
+
+.main-modal__container {
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  overflow: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 15px;
+}
+
+.main-modal__wrapper {
+  pointer-events: auto;
+  margin: auto;
+  position: relative;
+  z-index: 999;
+  background: #fdfdfd;
+  border-radius: 15px;
+  max-width: 990px;
+  overflow: hidden;
+  box-shadow: 0px 1px 20px rgb(240 240 240 / 80%);
+}
+
 .main-modal__title {
   margin: 0;
   padding: 27px;
@@ -53,25 +90,7 @@ export default {
   letter-spacing: -0.066px;
 }
 
-.main-modal__wrapper {
-  position: relative;
-  z-index: 999;
-  background: #fdfdfd;
-  border-radius: 15px;
-  max-width: 990px;
-  overflow: hidden;
-  box-shadow: 0px 1px 20px rgb(240 240 240 / 80%);
-}
-
 .main-modal__content {
   padding: 20px;
-}
-
-.main-modal__background {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: #979797;
-  opacity: 0.5;
 }
 </style>
