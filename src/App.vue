@@ -1,9 +1,14 @@
 <template>
-  <div id="app"></div>
+  <div id="app">
+    <main-page />
+  </div>
 </template>
 
 <script>
+import MainPage from './views/MainPage.vue';
+
 export default {
+  components: { MainPage },
   name: 'App',
 };
 </script>
