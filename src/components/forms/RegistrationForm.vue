@@ -108,6 +108,14 @@ export default {
       roles: [...userRoles],
       isUserAgree: true,
       isLoading: false,
+      requiredFileds: [
+        'public',
+        'username',
+        'role',
+        'email',
+        'password',
+        'password_repeat',
+      ],
     };
   },
   mounted() {
@@ -127,8 +135,13 @@ export default {
       };
 
       this.errors = {};
-
       this.isLoading = true;
+
+      const isValid = this.getValidationResult(userData);
+      if (!isValid) {
+        this.isLoading = false;
+        return;
+      }
 
       try {
         let response = await sendRegistrationRequest(this.url, userData);
@@ -136,7 +149,7 @@ export default {
         if (result.success) {
           this.$emit('success');
         } else {
-          this.setErrors(result.errors);
+          this.addErrors(result.errors);
         }
         console.log(result);
       } catch (e) {
@@ -145,11 +158,30 @@ export default {
         this.isLoading = false;
       }
     },
-    setErrors(errors) {
-      this.errors = Object.entries(errors).reduce((acc, [key, errors]) => {
+    addErrors(errors) {
+      const err = Object.entries(errors).reduce((acc, [key, errors]) => {
         acc[key] = errors[0];
         return acc;
       }, {});
+
+      this.errors = {
+        ...this.errors,
+        ...err,
+      };
+    },
+    getValidationResult(data) {
+      let isValid = true;
+
+      this.requiredFileds.forEach((field) => {
+        if (!data[field]) {
+          isValid = false;
+          this.addErrors({
+            [field]: ['Поле обязательно для заполнения'],
+          });
+        }
+      });
+
+      return isValid;
     },
   },
 };
