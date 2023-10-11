@@ -121,6 +121,7 @@ export default {
   user-select: none;
   border: 1px solid #e6e6eb;
   outline: none;
+  color: #000;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;

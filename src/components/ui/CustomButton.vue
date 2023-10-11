@@ -29,6 +29,7 @@ export default {
 
 <style scoped>
 .custom-button {
+  font-family: inherit;
   width: fit-content;
   cursor: pointer;
   padding: 10px 12px;

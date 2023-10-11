@@ -60,6 +60,7 @@ export default {
 
 input[type='text'],
 input[type='password'] {
+  font-family: inherit;
   border: 1px solid #e6e6eb;
   outline: none;
   font-size: 14px;
