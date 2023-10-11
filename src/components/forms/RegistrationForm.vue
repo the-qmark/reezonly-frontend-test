@@ -84,6 +84,7 @@ import CustomInput from '@/components/ui/CustomInput.vue';
 import CustomSelect from '@/components/ui/CustomSelect.vue';
 import CustomCheckbox from '@/components/ui/CustomCheckbox.vue';
 import userRoles from '@/assets/userRoles';
+import { sendRegistrationRequest } from '@/api/formsFunctions';
 
 export default {
   name: 'RegistrationForm',
@@ -125,32 +126,30 @@ export default {
         role: this.userData?.role?.value ?? null,
       };
 
+      this.errors = {};
+
       this.isLoading = true;
 
-      await fetch(this.url, {
-        method: 'POST',
-        body: JSON.stringify(userData),
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-        },
-      })
-        .then((response) => response.json())
-        .then((json) => {
-          if (json.success === false) {
-            this.errors = Object.entries(json.errors).reduce(
-              (acc, [key, errors]) => {
-                acc[key] = errors[0];
-                return acc;
-              },
-              {}
-            );
-          } else {
-            this.$emit('success');
-          }
-          console.log(json);
-        });
-
-      this.isLoading = false;
+      try {
+        let response = await sendRegistrationRequest(this.url, userData);
+        let result = await response.json();
+        if (result.success) {
+          this.$emit('success');
+        } else {
+          this.setErrors(result.errors);
+        }
+        console.log(result);
+      } catch (e) {
+        console.error(e);
+      } finally {
+        this.isLoading = false;
+      }
+    },
+    setErrors(errors) {
+      this.errors = Object.entries(errors).reduce((acc, [key, errors]) => {
+        acc[key] = errors[0];
+        return acc;
+      }, {});
     },
   },
 };
