@@ -84,7 +84,10 @@ import CustomInput from '@/components/ui/CustomInput.vue';
 import CustomSelect from '@/components/ui/CustomSelect.vue';
 import CustomCheckbox from '@/components/ui/CustomCheckbox.vue';
 import userRoles from '@/assets/userRoles';
-import { sendRegistrationRequest } from '@/api/formsFunctions';
+import {
+  sendRegistrationRequest,
+  getValidationResult,
+} from '@/api/formsFunctions';
 
 export default {
   name: 'RegistrationForm',
@@ -108,7 +111,7 @@ export default {
       roles: [...userRoles],
       isUserAgree: true,
       isLoading: false,
-      requiredFileds: [
+      requiredFields: [
         'public',
         'username',
         'role',
@@ -137,8 +140,10 @@ export default {
       this.errors = {};
       this.isLoading = true;
 
-      const isValid = this.getValidationResult(userData);
-      if (!isValid) {
+      const validResult = getValidationResult(userData, this.requiredFields);
+
+      if (!validResult.isValid) {
+        this.addErrors(validResult.errors);
         this.isLoading = false;
         return;
       }
@@ -159,29 +164,15 @@ export default {
       }
     },
     addErrors(errors) {
-      const err = Object.entries(errors).reduce((acc, [key, errors]) => {
+      const newErrors = Object.entries(errors).reduce((acc, [key, errors]) => {
         acc[key] = errors[0];
         return acc;
       }, {});
 
       this.errors = {
         ...this.errors,
-        ...err,
+        ...newErrors,
       };
-    },
-    getValidationResult(data) {
-      let isValid = true;
-
-      this.requiredFileds.forEach((field) => {
-        if (!data[field]) {
-          isValid = false;
-          this.addErrors({
-            [field]: ['Поле обязательно для заполнения'],
-          });
-        }
-      });
-
-      return isValid;
     },
   },
 };

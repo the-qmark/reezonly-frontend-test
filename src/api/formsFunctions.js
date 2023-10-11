@@ -8,4 +8,21 @@ const sendRegistrationRequest = (url, data) => {
   });
 };
 
-export { sendRegistrationRequest };
+const getValidationResult = (data, requiredFields) => {
+  let isValid = true;
+  let errors = {};
+
+  requiredFields.forEach((field) => {
+    if (!data[field]) {
+      isValid = false;
+      errors = {
+        ...errors,
+        [field]: ["Поле обязательно для заполнения"],
+      };
+    }
+  });
+
+  return { isValid, errors };
+};
+
+export { sendRegistrationRequest, getValidationResult };
