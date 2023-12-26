@@ -9,6 +9,7 @@
       @click="$emit('close-modal')"
     >
       OK
+      
     </custom-button>
   </MainModal>
 </template>
